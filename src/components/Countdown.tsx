@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
+import {ChallengesContext} from '../contexts/ChallengesContext'
 
 const Countdown = () => {
+  const { startNewChallenge,levelUp  } = useContext(ChallengesContext)
 
   const [time, setTime] = useState(0.1 * 60)
 
@@ -33,6 +35,7 @@ const Countdown = () => {
     }else if(isActive && time === 0){
       setHasFinished(true)
       setIsActive(false)
+      startNewChallenge();
     }
   }, [isActive, time])
 
