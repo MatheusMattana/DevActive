@@ -1,9 +1,26 @@
 import React, {useContext, useState} from 'react'
 import { ChallengesContext } from '../contexts/ChallengesContext'
+import { CountdownContext } from '../contexts/CountdownContext';
 
 const ChallengeBox = () => {
-  const {  activeChallenge, resetChallenge } = useContext(ChallengesContext);
+  const {  
+    activeChallenge, 
+    resetChallenge, 
+    completeChallenge 
+  } = useContext(ChallengesContext);
+
+  const { resetContdown } = useContext(CountdownContext)
   
+  function handleChallengeCompleted(){
+    completeChallenge()
+    resetContdown()
+  }
+
+  function handleChallengeFailed(){
+    resetChallenge()
+    resetContdown()
+  }
+
   return (
     <div id='challengeBoxContainer'>
       { activeChallenge ? (
@@ -18,12 +35,13 @@ const ChallengeBox = () => {
             <button 
               type='button'
               id='challengeFailedButton'
-              onClick={resetChallenge}>
+              onClick={handleChallengeFailed}>
                 Failed
             </button>
             <button 
               type='button'
-              id='challengeCompletedButton'>
+              id='challengeCompletedButton'
+              onClick={handleChallengeCompleted}>  
                 Completed
             </button>
           </footer>
