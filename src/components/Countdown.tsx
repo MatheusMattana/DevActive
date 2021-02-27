@@ -17,7 +17,7 @@ const Countdown = () => {
   
   return (
     <>
-      <div className={ hasFinished && 'hide'}>
+      <div className={ hasFinished ? 'hide': undefined}>
         <div id='countdownContainer'>
           <div>
             <span>{minuteLeft}</span>
