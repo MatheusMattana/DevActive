@@ -16,16 +16,18 @@ const Countdown = () => {
 
   
   return (
-    <div>
-      <div id='countdownContainer'>
-        <div>
-          <span>{minuteLeft}</span>
-          <span>{minuteRight}</span>
-        </div>
-        <span>:</span>
-        <div>
-          <span>{secondsLeft}</span>
-          <span>{secondsRight}</span>
+    <>
+      <div className={ hasFinished && 'hide'}>
+        <div id='countdownContainer'>
+          <div>
+            <span>{minuteLeft}</span>
+            <span>{minuteRight}</span>
+          </div>
+          <span>:</span>
+          <div>
+            <span>{secondsLeft}</span>
+            <span>{secondsRight}</span>
+          </div>
         </div>
       </div>
       {hasFinished ? (
@@ -56,7 +58,7 @@ const Countdown = () => {
           )}
         </>
       )}
-    </div>  
+    </>  
   )
 }
 

@@ -5,6 +5,8 @@ const LevelUpModal = () => {
 
   const {level, closeLevelUpModal} = useContext(ChallengesContext)
 
+  new Audio('/level-up.mp3').play()
+
   return (
     <div id="levelUpModalOverlay">
       <div id="levelUpModalContainer">

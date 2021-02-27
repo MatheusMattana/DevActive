@@ -8,8 +8,9 @@ import ChallengeBox from '../components/ChallengeBox';
 
 
 import Head from  'next/head';
-import { CountdownProvider } from '../contexts/CountdownContext';
+import { CountdownContext, CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext';
+import { useContext } from 'react';
 
 interface HomeProps{
   level: number
@@ -19,6 +20,7 @@ interface HomeProps{
 
 
 export default function Home(props:HomeProps) {
+
   return (
     <ChallengesProvider 
       level={props.level}
@@ -27,7 +29,7 @@ export default function Home(props:HomeProps) {
       >
       <div id="container">
         <Head>
-          <title>Inicio - move.it</title>
+          <title>Helthy Dev</title>
         </Head>
 
         <ExperienceBar />
@@ -37,7 +39,7 @@ export default function Home(props:HomeProps) {
           <div>
             <Profile/>
             <CompletedChallenges />
-            <Countdown />
+            <Countdown/>
           </div>
           <div>
             <ChallengeBox/>
@@ -45,6 +47,7 @@ export default function Home(props:HomeProps) {
         </section>
         </CountdownProvider>
       </div>
+      <img src="/HealthyDevLogoFull.svg" alt="App Logo" id='appLogo'/>
     </ChallengesProvider>
   );
 }

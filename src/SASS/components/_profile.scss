@@ -6,8 +6,8 @@
 }
 
 #profileContainer > img {
-  width: 5.5rem;
-  height: 5.5rem;
+  width: 6rem;
+  height: 6rem;
   border-radius: 50%;
 }
 
@@ -16,7 +16,7 @@
 }
 
 #profileContainer div strong {
-  font-size: 1.5rem;
+  font-size: 1.8rem;
   font-weight: 600;
   color: b.$title;
 }
@@ -25,6 +25,7 @@
   display: flex;
   font-size: 1rem;
   margin-top: 0.5rem;
+  color: b.$green;
 }
 
 #profileContainer div p img {

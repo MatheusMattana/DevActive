@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: space-evenly;
 
-    background: b.$white;
+    background: b.$black;
     box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
     border-radius: 0.5rem;
     font-size: 8.5rem;
@@ -30,11 +30,11 @@
   }
 
   > div span:first-child {
-    border-right: 1px solid #f0f1f3;
+    border-right: 1px solid b.$background;
   }
 
   > div span:last-child {
-    border-left: 1px solid #f0f1f3;
+    border-left: 1px solid b.$background;
   }
 }
 
@@ -47,16 +47,16 @@
   justify-content: center;
   border: 0;
   border-radius: 5px;
-  background: b.$blue;
-  color: b.$white;
+  background: b.$green-dark;
+  color: b.$title;
   font-size: 1.25rem;
   font-weight: 600;
   transition: background-color 0.2s;
   &:not(:disabled):hover {
-    background: b.$blue-dark;
+    background: b.$green;
   }
   &:disabled {
-    background: b.$white;
+    background: b.$black;
     color: b.$text;
     cursor: not-allowed;
     border-bottom: solid 4px b.$green;
@@ -68,10 +68,17 @@
 }
 
 #countdownButtonActive {
-  background: b.$white;
+  background: b.$black;
   color: b.$title;
+  border-bottom: solid 4px b.$red;
   &:not(:disabled):hover {
     background: b.$red;
-    color: b.$white;
+    color: b.$title;
+  }
+}
+
+@media (max-width: 900px) {
+  .hide {
+    display: none;
   }
 }

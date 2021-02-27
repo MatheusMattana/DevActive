@@ -9,7 +9,7 @@ const ChallengeBox = () => {
     completeChallenge 
   } = useContext(ChallengesContext);
 
-  const { resetContdown } = useContext(CountdownContext)
+  const { resetContdown, hasFinished } = useContext(CountdownContext)
   
   function handleChallengeCompleted(){
     completeChallenge()
@@ -22,32 +22,34 @@ const ChallengeBox = () => {
   }
 
   return (
+    <>
     <div id='challengeBoxContainer'>
       { activeChallenge ? (
         <div id='challengeBoxActive'>
-          <header>Get {activeChallenge.amount} xp</header>
+          <header>New challenge</header>
           <main>
             <img src={`icons/${activeChallenge.type}.svg`} alt="Get xp icon"/>
-            <strong>New challenge</strong>
+            <strong>Get {activeChallenge.amount} xp</strong>
             <p>{activeChallenge.description} </p>
           </main>
           <footer>
+          <button 
+            type='button'
+            id='challengeCompletedButton'
+            onClick={handleChallengeCompleted}>  
+              Completed
+          </button>
             <button 
               type='button'
               id='challengeFailedButton'
               onClick={handleChallengeFailed}>
                 Failed
             </button>
-            <button 
-              type='button'
-              id='challengeCompletedButton'
-              onClick={handleChallengeCompleted}>  
-                Completed
-            </button>
           </footer>
         </div>
       ) : (
       <div id="challengeBoxNotActive">
+        <img src="/HealthyDevLogoFull.svg" alt="App Logo"/>
         <strong>Complete a cycle to receive challenges</strong>
         <p>
           <img src="icons/level-up.svg" alt="level up icon"/>
@@ -55,8 +57,8 @@ const ChallengeBox = () => {
         </p>   
       </div>
       )}
-      
     </div>
+    </>
   )
 }
 

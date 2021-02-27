@@ -5,3 +5,11 @@
   gap: 6.25rem;
   align-content: center;
 }
+
+@media (max-width: 900px) {
+  #container section {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto;
+    gap: 2.5rem;
+  }
+}

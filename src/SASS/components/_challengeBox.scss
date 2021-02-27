@@ -2,7 +2,7 @@
 
 #challengeBoxContainer {
   height: 100%;
-  background: b.$white;
+  background: b.$black;
   border-radius: 5px;
   box-shadow: 0 0 60px rgba(0, 0, 0, 0.05);
   padding: 1.5rem 2rem;
@@ -17,6 +17,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  > img {
+    width: 70%;
+    margin-bottom: 8rem;
+  }
 
   strong {
     font-size: 1.5rem;
@@ -45,9 +50,9 @@
   flex-direction: column;
 
   header {
-    color: b.$blue;
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 2rem;
+    color: b.$title;
     padding: 0 2rem 1.5rem;
     border-bottom: 1px solid b.$gray-line;
   }
@@ -65,15 +70,15 @@
   }
 
   strong {
+    color: b.$green;
     font-weight: 600;
-    font-size: 2rem;
-    color: b.$title;
+    font-size: 1.25rem;
     margin: 1.5rem 0 1rem;
   }
 
   footer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 1rem;
 
     button {
@@ -85,20 +90,58 @@
       border-radius: 5px;
       font-size: 1rem;
       font-weight: 600;
-      color: b.$white;
       transition: filter 0.2s;
-
-      &:hover {
-        filter: brightness(0.9);
-      }
     }
   }
 }
 
 #challengeFailedButton {
-  background: b.$red;
+  background: rgba($color: b.$red, $alpha: 0.2);
+  color: b.$red;
+
+  &:hover {
+    background: b.$red;
+    color: b.$title;
+  }
 }
 
 #challengeCompletedButton {
-  background: b.$green;
+  background: rgba($color: b.$green-dark, $alpha: 0.2);
+  color: b.$green;
+
+  &:hover {
+    background: b.$green-dark;
+    color: b.$title;
+  }
+}
+
+#bottomLogo {
+  display: none;
+}
+
+@media (max-width: 900px) {
+  #challengeBoxActive {
+    height: 25rem;
+    img {
+      height: 5rem;
+    }
+  }
+
+  #challengeBoxNotActive {
+    > img {
+      display: none;
+    }
+
+    strong {
+      font-size: 1.2rem;
+      max-width: unset;
+    }
+
+    p {
+      max-width: unset;
+      img {
+        height: 2rem;
+      }
+    }
+  }
 }

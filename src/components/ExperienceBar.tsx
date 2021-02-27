@@ -7,12 +7,12 @@ const ExperienceBar = () => {
 
   return (
     <header id="experience-bar">
-      <span>0 xp</span>
+      <span>0 XP</span>
       <div>
         <div style={{width: `${percentToNextLevel}%`}}></div>
-        <span id="currentExperience" style={{left: `${percentToNextLevel}%`}}>{currentExperience} xp</span>
+        <span id="currentExperience" style={{left: `${percentToNextLevel}%`}}>{currentExperience} XP</span>
       </div>
-      <span>{experienceToNextLevel} xp</span>
+      <span>{experienceToNextLevel} XP</span>
     </header>
   )
 }
