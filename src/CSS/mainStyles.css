@@ -65,6 +65,10 @@ html:focus-within {
   html {
     font-size: 75%;
   }
+
+  body {
+    min-height: 90vh;
+  }
 }
 @media (max-width: 500px) {
   html {
