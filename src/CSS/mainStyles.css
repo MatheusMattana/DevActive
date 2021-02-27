@@ -66,6 +66,11 @@ html:focus-within {
     font-size: 75%;
   }
 }
+@media (max-width: 500px) {
+  html {
+    font-size: 50%;
+  }
+}
 /* Set core body defaults */
 body {
   min-height: 100vh;

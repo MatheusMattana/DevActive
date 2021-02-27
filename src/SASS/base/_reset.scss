@@ -48,6 +48,12 @@ html:focus-within {
   }
 }
 
+@media (max-width: 500px) {
+  html {
+    font-size: 50%;
+  }
+}
+
 /* Set core body defaults */
 
 body {
