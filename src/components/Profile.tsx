@@ -2,15 +2,15 @@ import { useContext } from "react"
 import { ChallengesContext } from "../contexts/ChallengesContext"
 
 
-const Profile = () => {
+const Profile = (props) => {
 
-  const { level } = useContext(ChallengesContext)
+  const { userName, level, user } = useContext(ChallengesContext)
 
   return (
     <div id='profileContainer'>
-      <img src="https://github.com/matheusmattana.png" alt="Matheus Mattana"/>
+      <img src={`https://github.com/${user}.png`} alt="Matheus Mattana"/>
       <div>
-        <strong>Matheus Mattana</strong>
+        <strong>{userName}</strong>
         <p>
           <img src="icons/level.svg" alt="Level up"/>
           Level {level}

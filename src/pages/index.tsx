@@ -5,27 +5,38 @@ import Countdown from '../components/Countdown';
 import ExperienceBar from '../components/ExperienceBar';
 import Profile from '../components/Profile';
 import ChallengeBox from '../components/ChallengeBox';
+import axios from 'axios'
+
+import { connectToDatabase } from '../utils/dbConnect'
 
 
 import Head from  'next/head';
 import { CountdownContext, CountdownProvider } from '../contexts/CountdownContext';
-import { ChallengesProvider } from '../contexts/ChallengesContext';
-import { useContext } from 'react';
+import { ChallengesProvider } from '../contexts/ChallengesContext'; 
+import { createContext, useState } from 'react';
+
 
 interface HomeProps{
-  level: number
-  currentExperience: number
-  challengesCompleted: number
+  userData: {
+    gitHubUser: string,
+    stats:{
+      level: number,
+      currentExperience: number,
+      challengesCompleted: number
+    }
+  },
+  userName: string
 }
 
 
 export default function Home(props:HomeProps) {
-
   return (
     <ChallengesProvider 
-      level={props.level}
-      currentExperience={props.currentExperience}
-      challengesCompleted={props.challengesCompleted}
+      user={props.userData.gitHubUser}
+      userName={props.userName}
+      level={props.userData.stats.level}
+      currentExperience={props.userData.stats.currentExperience}
+      challengesCompleted={props.userData.stats.challengesCompleted}
       >
       <div id="container">
         <Head>
@@ -54,13 +65,29 @@ export default function Home(props:HomeProps) {
 
 export const getServerSideProps: GetServerSideProps = async (ctx)=>{
 
-  const {level, currentExperience, challengesCompleted} = ctx.req.cookies
+  const { db } = await connectToDatabase();
+
+  async function getGitHubUserData(){
+    let userNameReq
+    try{
+      await axios.get(`https://api.github.com/users/${String(ctx.query.user)}`).then(res =>{
+        userNameReq = res.data.name
+      })
+      return userNameReq
+    }catch(e){
+      console.log(e)
+    }
+  }
+
+  let userName = await getGitHubUserData()
+
+  let userDataResponse = await db.collection("developers").findOne({gitHubUser: String(ctx.query.user)})
+
 
   return{
     props:{
-      level: Number(level ?? 1),
-      currentExperience: Number(currentExperience ?? 0),
-      challengesCompleted: Number(challengesCompleted ?? 0)
+      userData: JSON.parse(JSON.stringify(userDataResponse)),
+      userName: String(userName)
     }
   }
 }

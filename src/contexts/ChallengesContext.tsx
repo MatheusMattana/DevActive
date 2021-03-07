@@ -1,10 +1,11 @@
 import  {createContext, useState, ReactNode, useEffect} from 'react'
-import Cookies from 'js-cookie'
 import challenges from '../../challenges.json'
 import LevelUpModal from '../components/LevelUpModal'
 
 interface ChallengeProviderProps{
   children: ReactNode;
+  user: string;
+  userName: string;
   level: number
   currentExperience: number
   challengesCompleted: number
@@ -17,6 +18,8 @@ interface Challenge{
 }
 
 interface ChallengesContextData{
+  user: string;
+  userName: string;
   level: number;
   currentExperience: number;
   challengesCompleted: number;
@@ -37,6 +40,8 @@ export function ChallengesProvider(
     ...rest
 }:ChallengeProviderProps){
 
+  const [user, setUser] = useState(rest.user)
+  const [userName, setUserName] = useState(rest.userName)
   const [level, setLevel] = useState(rest.level)
   const [currentExperience, setCurrentExperience] = useState(rest.currentExperience)
   const [challengesCompleted, setChallengesCompleted] = useState(rest.challengesCompleted)
@@ -48,12 +53,6 @@ export function ChallengesProvider(
   useEffect(()=>{
     Notification.requestPermission();
   },[])
-
-  useEffect(()=>{
-    Cookies.set('level', String(level))
-    Cookies.set('currentExperience', String(currentExperience))
-    Cookies.set('challengesCompleted', String(challengesCompleted))
-  }, [level,currentExperience, challengesCompleted])
 
   function levelUp(){
     setLevel(level + 1)
@@ -101,6 +100,8 @@ export function ChallengesProvider(
 
   return(
     <ChallengesContext.Provider value={{
+      user,
+      userName,
       level, 
       currentExperience,
       challengesCompleted,
