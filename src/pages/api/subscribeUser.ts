@@ -10,7 +10,7 @@ export default async (request: NowRequest, response: NowResponse) =>{
 
     if(search == null){ 
       try{
-        await db.collection('developers').create({
+        await db.collection('developers').insertOne({
           gitHubUser: gitHubUser, 
           stats: {
             level: 1, 

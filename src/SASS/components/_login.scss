@@ -1,0 +1,66 @@
+@use '../base/base' as b;
+
+#loginContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  #loginFormContainer {
+    display: flex;
+    flex-direction: column;
+    height: 19rem;
+    width: 28rem;
+    justify-content: space-between;
+    font-size: 1.4rem;
+  }
+
+  form {
+    display: flex;
+    input {
+      flex: 1;
+      height: 3.5rem;
+      color: b.$text;
+      background-color: b.$black;
+      border: none;
+      padding: 0 0 0 1rem;
+    }
+
+    button {
+      height: 3.5rem;
+      width: 3.5rem;
+      background: b.$green-dark;
+      border: none;
+      padding: 0;
+      img {
+        margin: auto;
+        width: 50%;
+      }
+    }
+
+    > img {
+      width: 100%;
+    }
+  }
+
+  #loginInstructionContainer {
+    height: 2rem;
+    display: flex;
+    align-items: center;
+
+    > img {
+      height: 3rem;
+      padding-right: 1.6rem;
+    }
+
+    p {
+      color: b.$green-text;
+    }
+
+    .errorText {
+      color: b.$red-text;
+    }
+  }
+}

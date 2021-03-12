@@ -6,6 +6,7 @@ import ExperienceBar from '../components/ExperienceBar';
 import Profile from '../components/Profile';
 import ChallengeBox from '../components/ChallengeBox';
 import axios from 'axios'
+import { useRouter } from 'next/router'
 
 import { connectToDatabase } from '../utils/dbConnect'
 
@@ -13,7 +14,8 @@ import { connectToDatabase } from '../utils/dbConnect'
 import Head from  'next/head';
 import { CountdownContext, CountdownProvider } from '../contexts/CountdownContext';
 import { ChallengesProvider } from '../contexts/ChallengesContext'; 
-import { createContext, useState } from 'react';
+import { createContext, useState, useEffect } from 'react';
+import { Router } from 'next/router';
 
 
 interface HomeProps{
@@ -30,6 +32,7 @@ interface HomeProps{
 
 
 export default function Home(props:HomeProps) {
+ 
   return (
     <ChallengesProvider 
       user={props.userData.gitHubUser}
@@ -67,6 +70,14 @@ export const getServerSideProps: GetServerSideProps = async (ctx)=>{
 
   const { db } = await connectToDatabase();
 
+  function handleData(){
+    if(userDataResponse == null ){
+      ctx.res.setHeader('login', '/login')
+      ctx.res.statusCode = 302;
+      ctx.res.end();
+    }
+  } 
+
   async function getGitHubUserData(){
     let userNameReq
     try{
@@ -78,12 +89,20 @@ export const getServerSideProps: GetServerSideProps = async (ctx)=>{
       console.log(e)
     }
   }
+  let userName
 
-  let userName = await getGitHubUserData()
+  console.log(ctx.query.user)
 
-  let userDataResponse = await db.collection("developers").findOne({gitHubUser: String(ctx.query.user)})
+  if(ctx.query.user == undefined){
+    ctx.res.setHeader('Location', '/login')
+    ctx.res.statusCode = 302;
+    ctx.res.end();
+  }else{
+    userName = await getGitHubUserData()
+  }
 
-
+  const userDataResponse = await db.collection("developers").findOne({gitHubUser: String(ctx.query.user)})
+  
   return{
     props:{
       userData: JSON.parse(JSON.stringify(userDataResponse)),

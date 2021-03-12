@@ -499,4 +499,61 @@ select {
   font-size: 0;
 }
 
+#loginContainer {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#loginContainer #loginFormContainer {
+  display: flex;
+  flex-direction: column;
+  height: 19rem;
+  width: 28rem;
+  justify-content: space-between;
+  font-size: 1.4rem;
+}
+#loginContainer form {
+  display: flex;
+}
+#loginContainer form input {
+  flex: 1;
+  height: 3.5rem;
+  color: #dcdde0;
+  background-color: #1f1f1f;
+  border: none;
+  padding: 0 0 0 1rem;
+}
+#loginContainer form button {
+  height: 3.5rem;
+  width: 3.5rem;
+  background: #018c28;
+  border: none;
+  padding: 0;
+}
+#loginContainer form button img {
+  margin: auto;
+  width: 50%;
+}
+#loginContainer form > img {
+  width: 100%;
+}
+#loginContainer #loginInstructionContainer {
+  height: 2rem;
+  display: flex;
+  align-items: center;
+}
+#loginContainer #loginInstructionContainer > img {
+  height: 3rem;
+  padding-right: 1.6rem;
+}
+#loginContainer #loginInstructionContainer p {
+  color: #6fcf97;
+}
+#loginContainer #loginInstructionContainer .errorText {
+  color: #cf6f6f;
+}
+
 /*# sourceMappingURL=mainStyles.css.map */
