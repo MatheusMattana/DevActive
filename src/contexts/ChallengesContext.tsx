@@ -78,12 +78,7 @@ export function ChallengesProvider(
 
     setActiveChallenge(challenge)
 
-
-    if(Notification.permission === 'granted'){
-      new Notification('New challenge 🔥',{
-        body: `Worth  ${challenge.amount} xp!`
-      })
-    }
+    new Audio('/notification.mp3').play()
   }
 
   async function updateDataBase(){
