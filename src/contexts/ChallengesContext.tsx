@@ -2,6 +2,10 @@ import  {createContext, useState, ReactNode, useEffect} from 'react'
 import challenges from '../../challenges.json'
 import LevelUpModal from '../components/LevelUpModal'
 
+import axios from 'axios'
+
+import { connectToDatabase } from '../utils/dbConnect'
+
 interface ChallengeProviderProps{
   children: ReactNode;
   user: string;
@@ -54,8 +58,13 @@ export function ChallengesProvider(
     Notification.requestPermission();
   },[])
 
+  useEffect(()=>{
+    updateDataBase()
+  }, [currentExperience])
+
   function levelUp(){
     setLevel(level + 1)
+    console.log(level)
     setIsLevelUpModalOpen(true)
   }
 
@@ -78,7 +87,18 @@ export function ChallengesProvider(
     }
   }
 
-  function completeChallenge(){
+  async function updateDataBase(){
+    console.log("user: "+user )
+    console.log("level: "+level)
+    console.log("current experience: "+currentExperience)
+    console.log("challenges: "+challengesCompleted)
+
+    await axios.post('/api/updateUser',  {user, level, currentExperience, challengesCompleted }).catch(error =>{
+      console.error(error);
+    })
+  }
+
+  async function completeChallenge(){
     if(!activeChallenge) return;
     
     const { amount } = activeChallenge;
@@ -88,7 +108,7 @@ export function ChallengesProvider(
       finalExperience = finalExperience - experienceToNextLevel;
       levelUp();
     }
-
+    
     setCurrentExperience(finalExperience);
     setActiveChallenge(null);
     setChallengesCompleted(challengesCompleted + 1)

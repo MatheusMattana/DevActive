@@ -1,11 +1,10 @@
 import {GetServerSideProps} from 'next';
 
-import React, { FormEvent, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import  axios from 'axios';
 
 import Head from 'next/head'
-import { error } from 'node:console';
 
 interface LoginProps{
   error: string
@@ -17,7 +16,6 @@ export default function login(props: LoginProps){
   const [hasError, setHasError] = useState(props.error)
 
   useEffect(()=>{
-    console.log(props.error)
     hasError === 'false' ? setHasError('false') : setHasError('true')
     hasError === 'databaseerror' ? setHasError('databaseerror')  : ''
   }, [hasError])
@@ -33,7 +31,6 @@ export default function login(props: LoginProps){
         }
       })
     }catch{
-      console.log('passou')
       setHasError('databaseerror')
       router.push({ pathname: '/login', query: {error: hasError}})
     }
@@ -90,8 +87,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx)=>{
   let error = ctx.query.error
 
   error == undefined ? error = 'false' : error = 'true' 
-
-  console.log(error)
 
   return{
     props:{
