@@ -78,7 +78,6 @@ export function ChallengesProvider(
 
     setActiveChallenge(challenge)
 
-    new Audio('/notification.mp3').play()
 
     if(Notification.permission === 'granted'){
       new Notification('New challenge 🔥',{
@@ -88,11 +87,6 @@ export function ChallengesProvider(
   }
 
   async function updateDataBase(){
-    console.log("user: "+user )
-    console.log("level: "+level)
-    console.log("current experience: "+currentExperience)
-    console.log("challenges: "+challengesCompleted)
-
     await axios.post('/api/updateUser',  {user, level, currentExperience, challengesCompleted }).catch(error =>{
       console.error(error);
     })
