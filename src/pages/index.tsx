@@ -88,12 +88,6 @@ export const getServerSideProps: GetServerSideProps = async (ctx)=>{
   }
 
   const userDataResponse = await db.collection("developers").findOne({gitHubUser: String(ctx.query.user)})
-
-  if(userDataResponse === null){
-    ctx.res.setHeader('Location', '/login')
-    ctx.res.statusCode = 302;
-    ctx.res.end();
-  }
   
   return{
     props:{
