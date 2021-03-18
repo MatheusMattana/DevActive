@@ -119,6 +119,14 @@
   display: none;
 }
 
+#logOffButton {
+  margin-top: 2rem;
+  padding: 5px;
+  border-radius: 6px;
+  color: b.$red-text;
+  border: 1px solid b.$red-text;
+}
+
 @media (max-width: 900px) {
   #challengeBoxActive {
     height: 25rem;

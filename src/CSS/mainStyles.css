@@ -430,6 +430,14 @@ select {
   display: none;
 }
 
+#logOffButton {
+  margin-top: 2rem;
+  padding: 5px;
+  border-radius: 6px;
+  color: #cf6f6f;
+  border: 1px solid #cf6f6f;
+}
+
 @media (max-width: 900px) {
   #challengeBoxActive {
     height: 25rem;
@@ -554,6 +562,19 @@ select {
 }
 #loginContainer #loginInstructionContainer .errorText {
   color: #cf6f6f;
+}
+
+#loadingScreen {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: #2d2d2d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#loadingScreen > img {
+  width: 7rem;
 }
 
 /*# sourceMappingURL=mainStyles.css.map */

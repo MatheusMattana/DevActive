@@ -14,6 +14,7 @@ export default function login(props: LoginProps){
 
   const [gitHubUser, setGitHubUser] = useState('')
   const [hasError, setHasError] = useState(props.error)
+  const [isLoading, setIsLoading] = useState(false)
 
   useEffect(()=>{
     hasError === 'false' ? setHasError('false') : setHasError('true')
@@ -31,6 +32,7 @@ export default function login(props: LoginProps){
         }
       })
     }catch{
+      setIsLoading(false)
       setHasError('databaseerror')
       router.push({ pathname: '/login', query: {error: hasError}})
     }
@@ -39,10 +41,12 @@ export default function login(props: LoginProps){
 async function handleLogin(){
     event.preventDefault();
     try{
+      setIsLoading(true)
       await axios.get(`https://api.github.com/users/${gitHubUser}`)
       handleSubscription();
     }catch(e){
       setHasError('true')
+      setIsLoading(false)
       router.push({ pathname: 'login', query: {error: 'true'}})
     }
   }
@@ -78,6 +82,11 @@ async function handleLogin(){
           </button>
         </form>
       </div>
+      {isLoading === true && 
+      <div id='loadingScreen'>
+        <img src="loading.gif"/>
+      </div>
+      } 
     </div>
   )
 }

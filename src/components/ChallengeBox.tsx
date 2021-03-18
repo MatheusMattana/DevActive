@@ -1,6 +1,7 @@
 import React, {useContext, useState} from 'react'
 import { ChallengesContext } from '../contexts/ChallengesContext'
 import { CountdownContext } from '../contexts/CountdownContext';
+import Link from 'next/link'
 
 const ChallengeBox = () => {
   const {  
@@ -54,7 +55,10 @@ const ChallengeBox = () => {
         <p>
           <img src="icons/level-up.svg" alt="level up icon"/>
           Level up by completing challenges 
-        </p>   
+        </p>  
+        <Link href='/login'>
+          <a id='logOffButton'>log off</a>
+        </Link> 
       </div>
       )}
     </div>
