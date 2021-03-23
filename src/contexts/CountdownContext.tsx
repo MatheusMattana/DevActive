@@ -19,7 +19,7 @@ export const CountdownContext = createContext({} as  CountdownContextData)
 export function  CountdownProvider({children}: CountdownProviderProps){
   const { startNewChallenge,levelUp  } = useContext(ChallengesContext)
 
-  const [time, setTime] = useState(0.05 * 60)
+  const [time, setTime] = useState(25 * 60)
 
   const minutes = Math.floor(time/60);
   const seconds = time % 60
@@ -36,7 +36,7 @@ export function  CountdownProvider({children}: CountdownProviderProps){
   function resetContdown(){
     clearTimeout(countdownTimeout);
     setIsActive(false);
-    setTime(0.1 * 60)
+    setTime(25 * 60)
     setHasFinished(false)
   }
 

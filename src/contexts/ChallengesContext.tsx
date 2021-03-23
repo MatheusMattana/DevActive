@@ -1,6 +1,7 @@
 import  {createContext, useState, ReactNode, useEffect} from 'react'
 import challenges from '../../challenges.json'
 import LevelUpModal from '../components/LevelUpModal'
+import HowToUseModal from '../components/HowToUseModal'
 
 import axios from 'axios'
 
@@ -31,6 +32,7 @@ interface ChallengesContextData{
   activeChallenge: Challenge;
   levelUp: ()=>void;
   closeLevelUpModal: ()=>void;
+  closeHowToUseModal: ()=>void;
   startNewChallenge: ()=>void;
   completeChallenge: ()=>void;
   resetChallenge: ()=>void;
@@ -53,6 +55,7 @@ export function ChallengesProvider(
 
   const [activeChallenge, setActiveChallenge] = useState(null)
   const [isLevelUpModalOpen, setIsLevelUpModalOpen] = useState(false)
+  const [isHowToUseModalOpen, setIsHowToUseModalOpen] = useState(true)
 
   useEffect(()=>{
     Notification.requestPermission();
@@ -70,6 +73,10 @@ export function ChallengesProvider(
 
   function closeLevelUpModal(){
     setIsLevelUpModalOpen(false)
+  }
+
+  function closeHowToUseModal(){
+    setIsHowToUseModalOpen(false)
   }
 
   function startNewChallenge(){
@@ -116,6 +123,7 @@ export function ChallengesProvider(
       challengesCompleted,
       levelUp,
       closeLevelUpModal,
+      closeHowToUseModal,
       experienceToNextLevel,
       startNewChallenge,
       activeChallenge,
@@ -124,6 +132,7 @@ export function ChallengesProvider(
     }}>
       {children}
     {isLevelUpModalOpen && <LevelUpModal/>}
+    {isHowToUseModalOpen && <HowToUseModal/>}
     </ChallengesContext.Provider>
   )
 }
